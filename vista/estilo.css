@@ -569,3 +569,41 @@ footer {
   .nav-links { display: none; }
   .hero-cta { flex-direction: column; }
 }
+
+#otros-proyectos {
+  background: var(--surface);
+}
+
+.project-card {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 3rem;
+  border: 1px solid var(--border);
+  background: var(--card);
+  transition: all 0.3s ease;
+}
+
+.project-card:hover {
+  border-color: var(--gold);
+  transform: translateY(-5px);
+}
+
+.project-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.project-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: var(--gold);
+}
+
+.project-desc {
+  color: var(--muted);
+  line-height: 1.8;
+  max-width: 600px;
+  margin: 0 auto 2rem;
+}
