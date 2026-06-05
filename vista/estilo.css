@@ -1,4 +1,4 @@
-/* ─── VARIABLES Y RESET ─── */
+
 *, *::before, *::after {
   margin: 0;
   padding: 0;
@@ -28,7 +28,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Textura de fondo */
+/* fondo */
 body::before {
   content: '';
   position: fixed;
@@ -39,13 +39,12 @@ body::before {
   opacity: 0.5;
 }
 
-/* ─── SCROLLBAR ─── */
+/* scrolleo */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--border); }
 ::-webkit-scrollbar-thumb:hover { background: var(--gold); }
 
-/* ─── NAV ─── */
 nav {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -85,7 +84,7 @@ nav {
 
 .nav-links a:hover { color: var(--gold); }
 
-/* ─── HERO ─── */
+
 #hero {
   min-height: 100vh;
   display: grid;
@@ -187,7 +186,7 @@ nav {
 
 .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
 
-/* Hero derecha — estadísticas */
+
 .hero-right {
   display: flex;
   flex-direction: column;
@@ -230,7 +229,7 @@ nav {
   font-weight: 700;
 }
 
-/* ─── SECCIÓN BASE ─── */
+
 section {
   padding: 7rem 4rem;
   position: relative;
@@ -263,7 +262,7 @@ section {
   background: linear-gradient(to right, var(--border), transparent);
 }
 
-/* ─── SOBRE MÍ ─── */
+
 #sobre { background: var(--surface); }
 
 .sobre-grid {
@@ -311,7 +310,7 @@ section {
   color: var(--text);
 }
 
-/* ─── HABILIDADES ─── */
+/* mis habilidades */
 #habilidades { background: var(--bg); }
 
 .skills-grid {
@@ -349,7 +348,7 @@ section {
   line-height: 1.6;
 }
 
-/* ─── EDUCACIÓN ─── */
+/* estudio */
 #educacion { background: var(--surface); }
 
 .timeline {
@@ -413,7 +412,7 @@ section {
   text-transform: uppercase;
 }
 
-/* ─── DISPONIBILIDAD ─── */
+/* disponib*/
 #disponibilidad { background: var(--bg); }
 
 .disp-grid {
@@ -460,7 +459,7 @@ section {
   text-transform: uppercase;
 }
 
-/* ─── CONTACTO ─── */
+/*  contacto */
 #contacto {
   background: var(--surface);
   text-align: center;
@@ -510,7 +509,7 @@ section {
   color: var(--text);
 }
 
-/* ─── FOOTER ─── */
+/*pie*/
 footer {
   border-top: 1px solid var(--border);
   padding: 2rem 4rem;
@@ -532,7 +531,7 @@ footer {
   letter-spacing: 0.1em;
 }
 
-/* ─── ANIMACIONES ─── */
+/* animacion es */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(24px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -554,7 +553,7 @@ footer {
   transform: translateY(0);
 }
 
-/* ─── RESPONSIVE ─── */
+/* respons */
 @media (max-width: 900px) {
   nav { padding: 1.2rem 2rem; }
   .nav-links { gap: 1.5rem; }
