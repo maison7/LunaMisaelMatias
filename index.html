@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Misael Matias Luna — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #0a0c10;
+      --surface: #111318;
+      --card: #161a22;
+      --border: #1f2530;
+      --gold: #c9a84c;
+      --gold-light: #e8c96e;
+      --gold-dim: rgba(201,168,76,0.12);
+      --text: #e8e6df;
+      --muted: #7a8190;
+      --accent: #4a7fcb;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.5;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.4rem 4rem;
+      border-bottom: 1px solid var(--border);
+      background: rgba(10,12,16,0.85);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--gold);
+      letter-spacing: 0.06em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.25s;
+    }
+
+    .nav-links a:hover { color: var(--gold); }
+
+    #hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 8rem 4rem 4rem;
+      gap: 4rem;
+      position: relative;
+    }
+
+    .hero-bg-line {
+      position: absolute;
+      right: 0; top: 0; bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, var(--border) 30%, var(--border) 70%, transparent);
+    }
+
+    .hero-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.2s forwards;
+    }
+
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.4s forwards;
+    }
+
+    .hero-name span {
+      display: block;
+      color: var(--gold);
+    }
+
+    .hero-title {
+      margin-top: 1.5rem;
+      font-size: 1.05rem;
+      color: var(--muted);
+      font-weight: 400;
+      line-height: 1.7;
+      max-width: 480px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.6s forwards;
+    }
+
+    .hero-cta {
+      margin-top: 3rem;
+      display: flex;
+      gap: 1rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.8s forwards;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 2rem;
+      background: var(--gold);
+      color: #0a0c10;
+      font-weight: 500;
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 2rem;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-weight: 500;
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      background: transparent;
+      transition: border-color 0.2s, color 0.2s, transform 0.2s;
+    }
+
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+    .hero-right {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      opacity: 0;
+      animation: fadeIn 1s 1s forwards;
+    }
+
+    .stat-card {
+      border: 1px solid var(--border);
+      background: var(--card);
+      padding: 1.8rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+
+    .stat-card:hover { border-color: var(--gold); transform: translateX(6px); }
+
+    .stat-icon {
+      font-size: 1.8rem;
+      width: 3rem;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .stat-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.3rem;
+    }
+
+    .stat-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
+
+    section {
+      padding: 7rem 4rem;
+      position: relative;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .section-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--gold);
+      letter-spacing: 0.15em;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, var(--border), transparent);
+    }
+
+    #sobre { background: var(--surface); }
+
+    .sobre-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .sobre-text p {
+      font-size: 1.05rem;
+      line-height: 1.9;
+      color: #b0aaa0;
+      margin-bottom: 1.4rem;
+    }
+
+    .sobre-text p strong { color: var(--gold); font-weight: 500; }
+
+    .info-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .info-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.2rem;
+      border: 1px solid var(--border);
+      background: var(--card);
+    }
+
+    .info-key {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      min-width: 100px;
+    }
+
+    .info-val { font-size: 0.9rem; color: var(--text); }
+
+    #habilidades { background: var(--bg); }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .skill-card {
+      border: 1px solid var(--border);
+      background: var(--card);
+      padding: 2rem;
+      transition: border-color 0.3s, background 0.3s, transform 0.3s;
+      cursor: default;
+    }
+
+    .skill-card:hover {
+      border-color: var(--gold);
+      background: var(--gold-dim);
+      transform: translateY(-4px);
+    }
+
+    .skill-emoji { font-size: 2rem; margin-bottom: 1rem; display: block; }
+
+    .skill-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .skill-desc { font-size: 0.83rem; color: var(--muted); line-height: 1.6; }
+
+    #educacion { background: var(--surface); }
+
+    .timeline { position: relative; padding-left: 2rem; }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--gold), var(--border));
+    }
+
+    .timeline-item { position: relative; padding: 0 0 3.5rem 2.5rem; }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -0.35rem;
+      top: 0.4rem;
+      width: 0.7rem;
+      height: 0.7rem;
+      background: var(--gold);
+      border: 2px solid var(--bg);
+    }
+
+    .timeline-period {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+
+    .timeline-institution {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+
+    .timeline-career { font-size: 0.9rem; color: var(--muted); margin-bottom: 0.6rem; }
+
+    .timeline-badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-size: 0.7rem;
+      font-family: 'DM Mono', monospace;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    #disponibilidad { background: var(--bg); }
+
+    .disp-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .disp-card {
+      border: 1px solid var(--border);
+      background: var(--card);
+      padding: 2.5rem;
+      text-align: center;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+
+    .disp-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+
+    .disp-icon { font-size: 2.5rem; margin-bottom: 1rem; display: block; }
+
+    .disp-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .disp-days { font-size: 0.85rem; color: var(--muted); line-height: 1.7; }
+
+    .disp-tag {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.3rem 1rem;
+      background: var(--gold-dim);
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    #contacto { background: var(--surface); text-align: center; }
+
+    .contact-intro {
+      max-width: 600px;
+      margin: 0 auto 3.5rem;
+      font-size: 1.05rem;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .contact-cards {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .contact-card {
+      border: 1px solid var(--border);
+      background: var(--card);
+      padding: 1.5rem 2.5rem;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+
+    .contact-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+
+    .contact-icon { font-size: 1.4rem; }
+
+    .contact-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.2rem;
+    }
+
+    .contact-value { font-size: 0.9rem; color: var(--text); }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--gold);
+    }
+
+    .footer-copy {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border); }
+    ::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+
+    @media (max-width: 900px) {
+      nav { padding: 1.2rem 2rem; }
+      .nav-links { gap: 1.5rem; }
+      #hero { grid-template-columns: 1fr; padding: 7rem 2rem 3rem; }
+      .hero-bg-line { display: none; }
+      section { padding: 5rem 2rem; }
+      .sobre-grid, .disp-grid, .skills-grid { grid-template-columns: 1fr; }
+      footer { padding: 1.5rem 2rem; flex-direction: column; gap: 0.8rem; text-align: center; }
+    }
+
+    @media (max-width: 600px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hero-cta { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-logo">M. Luna</div>
+    <ul class="nav-links">
+      <li><a href="#sobre">Perfil</a></li>
+      <li><a href="#habilidades">Habilidades</a></li>
+      <li><a href="#educacion">Educación</a></li>
+      <li><a href="#disponibilidad">Disponibilidad</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <section id="hero">
+    <div class="hero-left">
+      <p class="hero-eyebrow">// Analista de Sistemas en formación</p>
+      <h1 class="hero-name">
+        Misael<br>
+        <span>Matias Luna</span>
+      </h1>
+      <p class="hero-title">
+        Estudiante de Analista de Sistemas, con habilidades en desarrollo web y tecnología.
+        Comprometido, responsable y dispuesto a crecer profesionalmente.
+      </p>
+      <div class="hero-cta">
+        <a href="#contacto" class="btn-primary">Contactarme →</a>
+        <a href="#sobre" class="btn-outline">Ver perfil</a>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="stat-card">
+        <div class="stat-icon">🎓</div>
+        <div>
+          <div class="stat-label">Promedio de egreso</div>
+          <div class="stat-value">9.10 / 10</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🌐</div>
+        <div>
+          <div class="stat-label">Nivel de inglés</div>
+          <div class="stat-value">B2 — Intermedio Alto</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">📍</div>
+        <div>
+          <div class="stat-label">Ubicación</div>
+          <div class="stat-value">Moreno, Buenos Aires</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">💼</div>
+        <div>
+          <div class="stat-label">Disponibilidad inmediata</div>
+          <div class="stat-value">Part Time · Full Time fines de semana</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-bg-line"></div>
+  </section>
+
+  <section id="sobre">
+    <div class="section-header reveal">
+      <span class="section-num">01</span>
+      <h2 class="section-title">Perfil profesional</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="sobre-grid">
+      <div class="sobre-text reveal">
+        <p>Me llamo <strong>Misael Matias Luna</strong>, tengo 20 años y vivo en el partido de Moreno, Buenos Aires. Actualmente curso el segundo año de la carrera <strong>Analista de Sistemas</strong>, turno vespertino, en el Instituto Superior N° 182.</p>
+        <p>Me caracterizo por ser <strong>responsable y comprometido</strong> en cada rol que asumo, con buena predisposición para trabajar en equipo y adaptarme rápidamente a nuevos entornos laborales.</p>
+        <p>Tengo interés en el mundo de la <strong>tecnología y el desarrollo digital</strong>, lo que me llevó a adquirir conocimientos en desarrollo web y manejo de herramientas digitales, complementados con un <strong>nivel de inglés B2</strong>.</p>
+      </div>
+      <div class="info-list reveal">
+        <div class="info-item"><div class="info-key">Nombre</div><div class="info-val">Misael Matias Luna</div></div>
+        <div class="info-item"><div class="info-key">Edad</div><div class="info-val">20 años</div></div>
+        <div class="info-item"><div class="info-key">Ubicación</div><div class="info-val">Barrio San José, Moreno, Buenos Aires</div></div>
+        <div class="info-item"><div class="info-key">Teléfono</div><div class="info-val">11 3628-2125</div></div>
+        <div class="info-item"><div class="info-key">E-mail</div><div class="info-val">misaelluna152@gmail.com</div></div>
+        <div class="info-item"><div class="info-key">Idioma</div><div class="info-val">Inglés B2 — Intermedio Alto</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="habilidades">
+    <div class="section-header reveal">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Habilidades</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card reveal">
+        <span class="skill-emoji">💻</span>
+        <div class="skill-name">Dispositivos digitales</div>
+        <div class="skill-desc">Manejo fluido de computadoras, smartphones y herramientas de oficina digital.</div>
+      </div>
+      <div class="skill-card reveal">
+        <span class="skill-emoji">🌐</span>
+        <div class="skill-name">Desarrollo web</div>
+        <div class="skill-desc">Conocimientos en tecnologías web: HTML, CSS y fundamentos de programación.</div>
+      </div>
+      <div class="skill-card reveal">
+        <span class="skill-emoji">📱</span>
+        <div class="skill-name">Redes sociales</div>
+        <div class="skill-desc">Gestión y uso estratégico de redes sociales y plataformas digitales.</div>
+      </div>
+      <div class="skill-card reveal">
+        <span class="skill-emoji">🇬🇧</span>
+        <div class="skill-name">Inglés B2</div>
+        <div class="skill-desc">Nivel intermedio-alto certificado. Lectura técnica y comunicación en inglés.</div>
+      </div>
+      <div class="skill-card reveal">
+        <span class="skill-emoji">🤝</span>
+        <div class="skill-name">Trabajo en equipo</div>
+        <div class="skill-desc">Buen trato interpersonal, comunicación efectiva y disposición para colaborar.</div>
+      </div>
+      <div class="skill-card reveal">
+        <span class="skill-emoji">⚡</span>
+        <div class="skill-name">Adaptabilidad</div>
+        <div class="skill-desc">Capacidad de aprender rápidamente y adaptarme a nuevos entornos laborales.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="educacion">
+    <div class="section-header reveal">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Educación</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item reveal">
+        <div class="timeline-period">En curso</div>
+        <div class="timeline-institution">Instituto Superior de Formación Técnica N° 182</div>
+        <div class="timeline-career">Analista de Sistemas — Segundo año</div>
+        <span class="timeline-badge">Cursando</span>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-period">2018 — 2023</div>
+        <div class="timeline-institution">Instituto Santa Clara de Asís</div>
+        <div class="timeline-career">Bachiller — Especializado en Ciencias Sociales</div>
+        <span class="timeline-badge">Promedio 9.10</span>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-period">2012 — 2022</div>
+        <div class="timeline-institution">Ok Institute — School of English</div>
+        <div class="timeline-career">Inglés — Nivel B2 Intermedio-Alto · Curso: Advanced</div>
+        <span class="timeline-badge">Certificado B2</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="disponibilidad">
+    <div class="section-header reveal">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Disponibilidad</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="disp-grid">
+      <div class="disp-card reveal">
+        <span class="disp-icon">🗓️</span>
+        <div class="disp-title">Lunes a Viernes</div>
+        <div class="disp-days">Disponible en horario reducido,<br>compatible con mis estudios vespertinos.</div>
+        <div class="disp-tag">Part Time</div>
+      </div>
+      <div class="disp-card reveal">
+        <span class="disp-icon">⭐</span>
+        <div class="disp-title">Sábados, Domingos y Feriados</div>
+        <div class="disp-days">Disponibilidad completa durante<br>todo el día sin restricciones.</div>
+        <div class="disp-tag">Full Time</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto">
+    <div class="section-header reveal" style="justify-content:center; text-align:center; flex-direction:column; gap:0.5rem;">
+      <span class="section-num">05</span>
+      <h2 class="section-title">Contacto</h2>
+    </div>
+    <p class="contact-intro reveal">
+      Estoy disponible para oportunidades laborales. No dudes en comunicarte conmigo por cualquiera de estos medios.
+    </p>
+    <div class="contact-cards reveal">
+      <a href="https://wa.me/5491136282125" target="_blank" class="contact-card">
+        <div class="contact-icon">📱</div>
+        <div>
+          <div class="contact-label">WhatsApp</div>
+          <div class="contact-value">11 3628-2125</div>
+        </div>
+      </a>
+      <a href="https://mail.google.com/mail/?view=cm&to=misaelluna152@gmail.com" target="_blank" class="contact-card">
+        <div class="contact-icon">✉️</div>
+        <div>
+          <div class="contact-label">Gmail</div>
+          <div class="contact-value">misaelluna152@gmail.com</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-name">Misael Matias Luna</div>
+    <div class="footer-copy">© 2026 — Todos los derechos reservados</div>
+  </footer>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => observer.observe(el));
+
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => {
+        if (window.scrollY >= s.offsetTop - 120) current = s.id;
+      });
+      navLinks.forEach(a => {
+        a.style.color = a.getAttribute('href') === '#' + current ? 'var(--gold)' : '';
+      });
+    });
+  </script>
+</body>
+</html>
